@@ -8,7 +8,7 @@ But you do not know what to listen, since you are a such lazy guy.
 > 'Can I just type in my mood or class name of the music, and I want the code to do the rest thing?'
 
 
-Sure, try this: `$ ./jingfm -u xvfeng -p xvfeng -k rock`
+Sure, try this: `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
 
 ```
 trying to login to Jing.fm ...
