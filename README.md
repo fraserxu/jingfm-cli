@@ -10,7 +10,7 @@ But you do not know what to listen, since you are a such lazy guy.
 
 Sure, try this: `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
 
-**Hint:** use double quotes to include the keywords `"蚂蚁"`
+**Hint:** use double quotes to include the keywords `"张楚"` or `"张楚 蚂蚁"`
 
 ``` js
 trying to login to Jing.fm ...
