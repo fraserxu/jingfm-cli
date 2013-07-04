@@ -10,6 +10,8 @@ But you do not know what to listen, since you are a such lazy guy.
 
 Sure, try this: `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
 
+**Hint:** use double quotes to include the keywords `"蚂蚁"`
+
 ``` js
 trying to login to Jing.fm ...
 success logged in to Jing.fm ...
@@ -44,8 +46,6 @@ Ok, that's it. You are welcome!
 
 * A [Jing.fm](http://jing.fm) account to login
 * Mac to open a browser in command line (I promise to improve this soon)
-* English keywords (Need more time to support Chinese)
-* Single words
 
 ## Liscense:
 
