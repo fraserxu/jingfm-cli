@@ -22,21 +22,29 @@
 尝试打开浏览器...
 享受音乐吧!
 ```
+### 安装方法
+
+``` bash
+npm install jingfm-cli
+```
 #### 不知道怎么用？
 
-试试这样 `$ ./jingfm --help`
+试试这样 `$ jingfm-cli --help`
 
 ``` js
 Usage: jingfm [options] [command]
 
 Commands:
 
-play [options]         Try to play a song from Jing.fm
+  play                   Try to play a song from Jing.fm
 
 Options:
 
--h, --help     output usage information
--V, --version  output the version number
+  -h, --help                 output usage information
+  -V, --version              output the version number
+  -u, --username <username>  Email
+  -p, --password <password>  Password
+  -k, --keywords <keywords>  Keywords
 ```
 
 听歌去吧，不用谢！
@@ -46,7 +54,6 @@ Options:
 ## 依赖
 
 * [Jing.fm](http://jing.fm) 帐号用于登陆
-* 暂时只支持在Mac下使用 `open` 命令开启浏览器，后面肯定会改。。。
 
 ## Liscense:
 
