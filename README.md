@@ -22,12 +22,17 @@
 尝试打开浏览器...
 享受音乐吧!
 ```
+### 安装方法
+
+``` bash
+npm install jingfm-cli
+```
 #### 不知道怎么用？
 
-试试这样 `$ ./jingfm --help`
+试试这样 `$ jingfm-cli --help`
 
 ``` js
-Usage: jingfm [options] [command]
+Usage: jingfm-cli [options] [command]
 
 Commands:
 
