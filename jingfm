@@ -46,15 +46,6 @@ function play(url) {
     child = exec('open ' + url + '?start=0', function(error, stdout, stderr) {
         console.log('enjoy the song!');
     });
-};
-
-/**
- * Choose a song from the list
- *
- * @param song lists
- */
-function choose(lists) {
-
 }
 
 /**
