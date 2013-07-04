@@ -1,4 +1,6 @@
-## Play music from your awesome command line
+## Nodejs 命令行播放[Jing.fm](http://jing.fm)歌曲
+
+![jingfm-cli](https://f.cloud.github.com/assets/1183541/749676/cdf5cc76-e4b2-11e2-839c-84a24d8c99f7.png)
 
 > [Jing.fm](http://jing.fm) 是一款开创性的音乐应用,它最大的特色就是首创地通过“描述”来找到自己喜欢的音乐。Jing.fm改变用户收听音乐的方式.例如你可以搜索 `吃饱了撑着`， `失恋了`, `我和小伙伴都惊呆了`，都是优秀的搜索条件。彻底解决不知道听啥的问题！
 
