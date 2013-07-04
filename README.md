@@ -1,5 +1,7 @@
 ## Play music from your awesome command line
 
+> [Jing.fm](http://jing.fm) 是一款开创性的音乐应用,它最大的特色就是首创地通过“描述”来找到自己喜欢的音乐。Jing.fm改变用户收听音乐的方式.例如你可以搜索 `吃饱了撑着`， `失恋了`, `我和小伙伴都惊呆了`，都是优秀的搜索条件。彻底解决不知道听啥的问题！
+
 So you are a **geek** , and you just want to start listening music with your lovely command line.
 
 But you do not know what to listen, since you are a such lazy guy.
