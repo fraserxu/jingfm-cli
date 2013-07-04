@@ -32,16 +32,19 @@ npm install jingfm-cli
 试试这样 `$ jingfm-cli --help`
 
 ``` js
-Usage: jingfm-cli [options] [command]
+Usage: jingfm [options] [command]
 
 Commands:
 
-play [options]         Try to play a song from Jing.fm
+  play                   Try to play a song from Jing.fm
 
 Options:
 
--h, --help     output usage information
--V, --version  output the version number
+  -h, --help                 output usage information
+  -V, --version              output the version number
+  -u, --username <username>  Email
+  -p, --password <password>  Password
+  -k, --keywords <keywords>  Keywords
 ```
 
 听歌去吧，不用谢！
