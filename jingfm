@@ -7,6 +7,7 @@ var program = require('commander');
 var request = require('request');
 var api_url = 'http://jing.fm/api/v1';
 var Q = require('q');
+var os = require('os');
 var exec = require('child_process').exec;
 var child;
 
@@ -37,13 +38,28 @@ program
 
 program.parse(process.argv);
 
+function getCommand () {
+  var type = os.type();
+  switch(type) {
+    case 'Darwin':
+      return 'open';
+    case 'Linux':
+      return 'xdg-open';
+    case 'Windows_NT':
+      return 'start';
+  }
+  return 'google-chrome';
+}
 /**
  * Open the song in the browser
  *
  * @param  {[string]} url
  */
 function play(url) {
-    child = exec('open ' + url + '?start=0', function(error, stdout, stderr) {
+  console.log(url);
+  var cmd = getCommand();
+    child = exec(cmd + ' ' + url + '?start=0', function(error, stdout, stderr) {
+        if(error) throw error;
         console.log('享受音乐吧!');
     });
 }
