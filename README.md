@@ -10,6 +10,8 @@
 
 > “我可以根据我的心情或者音乐的种类来搜歌么？我很懒。。。”
 
+### 命令行可执行文件
+
 当然可以，打开你牛逼的命令行，输入： `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
 
 **小提示：** 使用双引号支持多个汉字空格搜索
@@ -38,6 +40,12 @@ Options:
 -h, --help     output usage information
 -V, --version  output the version number
 ```
+
+### Nodejs 进程参数
+
+如果你比较喜欢使用node打开：
+
+`$ node jingfm.js xvfeng xvfeng "some rock music"`
 
 听歌去吧，不用谢！
 
