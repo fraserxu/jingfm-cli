@@ -1,0 +1,163 @@
+#!/usr/local/bin/node
+
+/**
+ * Module dependencies.
+ */
+var program = require('commander');
+var request = require('request');
+var api_url = 'http://jing.fm/api/v1';
+var Q = require('q');
+var exec = require('child_process').exec;
+var child;
+
+program
+    .version('0.0.1')
+    .command('play')
+    .description('Try to play a song from Jing.fm')
+    .option('-u, --username [username]', 'Username')
+    .option('-p, --password [password]', 'Password')
+    .option('-k, --keywords [keywords]', 'Keywords')
+    .action(function(options) {
+        console.log('trying to login to Jing.fm ...');
+        login(options.username, options.password, options.keywords)
+            .then(getList).then(getUrl).then(function(url) {
+                console.log('trying to open it in the browser');
+                play(url);
+            }, function(err) {
+                console.log(err);
+            });
+    })
+    .usage('jingfm play [options]')
+    .on('--help', function() {
+        console.log(' Example');
+        console.log();
+        console.log(' $ ./jingfm -u xvfeng -p xvfeng -k Rock');
+        console.log();
+    });
+
+program.parse(process.argv);
+
+/**
+ * Open the song in the browser
+ *
+ * @param  {[string]} url
+ */
+function play(url) {
+    child = exec('open ' + url + '?start=0', function(error, stdout, stderr) {
+        console.log('enjoy the song!');
+    });
+};
+
+/**
+ * Choose a song from the list
+ *
+ * @param song lists
+ */
+function choose(lists) {
+
+}
+
+/**
+ * Login to get the session
+ *
+ * @param email
+ * @param password
+ * @param keywords
+ * @return response object
+ */
+function login(email, pwd, keywords) {
+    var def = Q.defer();
+
+    var u = api_url + '/sessions/create';
+    request.post({
+        url: u,
+        form: {
+            email: email,
+            pwd: pwd
+        },
+        json: true
+    }, function(err, response, body) {
+        if (err) def.reject(err);
+        console.log('success logged in to Jing.fm ...');
+        def.resolve({
+            headers: response.headers,
+            body: body,
+            keywords: keywords
+        });
+    })
+
+    return def.promise;
+}
+
+/**
+ * Get the play list
+ *
+ * @param options
+ * @return song list object
+ */
+function getList(options) {
+    var def = Q.defer();
+
+    var headers = options.headers;
+    var body = options.body;
+    var keywords = options.keywords;
+
+    var u = api_url + '/search/jing/fetch_pls';
+    request.post({
+        url: u,
+        headers: {
+            'Jing-A-Token-Header': headers['jing-a-token-header'],
+            'Jing-R-Token-Header': headers['jing-r-token-header']
+        },
+        form: {
+            q: keywords,
+            u: body.result.usr.id
+        },
+        json: true
+    }, function(err, response, body) {
+        if (err) def.reject(err);
+        console.log('trying to get play list...');
+        if (body.result.total === 0) {
+            console.log('no song matched, try another keywords');
+            def.reject(new Error('no song matched, try another keywords'));
+        } else {
+            def.resolve({
+                headers: headers,
+                mid: body.result.items[0].mid
+            });
+        }
+    });
+
+    return def.promise;
+}
+
+/**
+ * Get song url
+ *
+ * @param options
+ * @return song url
+ */
+function getUrl(options) {
+    var def = Q.defer();
+
+    var u = api_url + '/media/song/surl';
+    var headers = options.headers;
+
+    request.post({
+        url: u,
+        headers: {
+            'Jing-A-Token-Header': headers['jing-a-token-header'],
+            'Jing-R-Token-Header': headers['jing-r-token-header']
+        },
+        form: { mid: options.mid },
+        json: true
+    }, function(err, response, body) {
+        if (err) def.reject(err);
+        console.log('trying to get song url...');
+        def.resolve(body.result);
+    });
+
+    return def.promise;
+}
+
+
