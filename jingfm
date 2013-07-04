@@ -18,10 +18,10 @@ program
     .option('-p, --password [password]', 'Password')
     .option('-k, --keywords [keywords]', 'Keywords')
     .action(function(options) {
-        console.log('trying to login to Jing.fm ...');
+        console.log('尝试登录到 Jing.fm ...');
         login(options.username, options.password, options.keywords)
             .then(getList).then(getUrl).then(function(url) {
-                console.log('trying to open it in the browser');
+                console.log('尝试打开浏览器...');
                 play(url);
             }, function(err) {
                 console.log(err);
@@ -44,7 +44,7 @@ program.parse(process.argv);
  */
 function play(url) {
     child = exec('open ' + url + '?start=0', function(error, stdout, stderr) {
-        console.log('enjoy the song!');
+        console.log('享受音乐吧!');
     });
 }
 
@@ -69,7 +69,7 @@ function login(email, pwd, keywords) {
         json: true
     }, function(err, response, body) {
         if (err) def.reject(err);
-        console.log('success logged in to Jing.fm ...');
+        console.log('成功登录到 Jing.fm ...');
         def.resolve({
             headers: response.headers,
             body: body,
@@ -107,10 +107,9 @@ function getList(options) {
         json: true
     }, function(err, response, body) {
         if (err) def.reject(err);
-        console.log('trying to get play list...');
+        console.log('获取歌曲列表中 ...');
         if (body.result.total === 0) {
-            console.log('no song matched, try another keywords');
-            def.reject(new Error('no song matched, try another keywords'));
+            def.reject(new Error('Jing.fm 好像没找到你要的歌，换个关键词吧亲！'));
         } else {
             def.resolve({
                 headers: headers,
@@ -144,7 +143,7 @@ function getUrl(options) {
         json: true
     }, function(err, response, body) {
         if (err) def.reject(err);
-        console.log('trying to get song url...');
+        console.log('尝试获取歌曲播放地址 ...');
         def.resolve(body.result);
     });
 
