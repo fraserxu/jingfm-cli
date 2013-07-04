@@ -51,7 +51,6 @@ Options:
 ## 依赖
 
 * [Jing.fm](http://jing.fm) 帐号用于登陆
-* 暂时只支持在Mac下使用 `open` 命令开启浏览器，后面肯定会改。。。
 
 ## Liscense:
 
