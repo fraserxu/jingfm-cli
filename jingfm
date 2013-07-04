@@ -13,11 +13,11 @@ var child;
 
 program
     .version('0.0.1')
+    .option('-u, --username <username>', 'Email')
+    .option('-p, --password <password>', 'Password')
+    .option('-k, --keywords <keywords>', 'Keywords')
     .command('play')
     .description('Try to play a song from Jing.fm')
-    .option('-u, --username [username]', 'Username')
-    .option('-p, --password [password]', 'Password')
-    .option('-k, --keywords [keywords]', 'Keywords')
     .action(function(options) {
         console.log('尝试登录到 Jing.fm ...');
         login(options.username, options.password, options.keywords)
