@@ -62,14 +62,7 @@ program.parse(process.argv);
 function play(url) {
     var r = request(url);
     console.log('正在打开！');
-    r.pipe(fs.createWriteStream('song.m4a'), {
-        end: false,
-        flags: 'r+',
-        mode: 0777
-    });
-    r.on("end", function() {
-        child = exec('afplay song.m4a', function(error, stdout, stderr) {
-            console.log('开始播放!！');
-        });
+    child = exec('mplayer ' + url, function(error, stdout, stderr) {
+        console.log('开始播放!！');
     });
 }
