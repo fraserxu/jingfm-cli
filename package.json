@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "jingfm player in command line",
   "bin":"jingfm",
-  "main": "index.js",
-  "repository": "",
+  "repository": "git@github.com:fraserxu/jingfm-cli.git",
   "dependencies": {
     "request": "~2.21.0",
     "commander": "~1.2.0",
