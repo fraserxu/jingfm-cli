@@ -2,6 +2,7 @@
   "name": "jingfm-cli",
   "version": "0.0.1",
   "description": "jingfm player in command line",
+  "bin":"jingfm",
   "main": "index.js",
   "repository": "",
   "dependencies": {

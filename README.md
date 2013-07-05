@@ -20,25 +20,33 @@
 尝试登录到 Jing.fm ...
 成功登录到 Jing.fm ...
 获取歌曲列表中 ...
+即将播放 坂本英城 的 アクアヘブン
 尝试获取歌曲播放地址 ...
-尝试打开浏览器...
-享受音乐吧!
+正在打开...
 ```
-##### 不知道怎么用？
+### 安装方法
 
-试试这样 `$ ./jingfm --help`
+``` bash
+npm install jingfm-cli
+```
+#### 不知道怎么用？
+
+试试这样 `$ jingfm-cli --help`
 
 ``` js
 Usage: jingfm [options] [command]
 
 Commands:
 
-play [options]         Try to play a song from Jing.fm
+  play                   Try to play a song from Jing.fm
 
 Options:
 
--h, --help     output usage information
--V, --version  output the version number
+  -h, --help                 output usage information
+  -V, --version              output the version number
+  -u, --username <username>  Email
+  -p, --password <password>  Password
+  -k, --keywords <keywords>  Keywords
 ```
 
 #### 方法二：Nodejs 进程参数
@@ -49,12 +57,10 @@ Options:
 
 听歌去吧，不用谢！
 
-对了，忘记强调使用时要加上 `npm install` Orz...
 
 ## 依赖
 
 * [Jing.fm](http://jing.fm) 帐号用于登陆
-* 暂时只支持在Mac下使用 `open` 命令开启浏览器，后面肯定会改。。。
 
 ## Liscense:
 
