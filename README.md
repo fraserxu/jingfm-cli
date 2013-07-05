@@ -14,6 +14,8 @@
 
 当然可以，打开你牛逼的命令行，输入： `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
 
+又或者你使用 `npm install jingfm-cli -g` 安装，执行： `jingfm-cli play -u $username -p $password -k "keywords here"`
+
 **小提示：** 使用双引号支持多个汉字空格搜索
 
 ``` js
@@ -26,9 +28,7 @@
 ```
 ### 安装方法
 
-``` bash
-npm install jingfm-cli
-```
+
 #### 不知道怎么用？
 
 试试这样 `$ jingfm-cli --help`
