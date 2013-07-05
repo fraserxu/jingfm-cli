@@ -63,6 +63,6 @@ function play(url) {
     var r = request(url);
     console.log('正在打开！');
     child = exec('mplayer ' + url, function(error, stdout, stderr) {
-        console.log('开始播放!！');
+        console.log('播放完毕!！');
     });
 }
