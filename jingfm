@@ -6,6 +6,7 @@
 var program = require('commander');
 var request = require('request');
 var api_url = 'http://jing.fm/api/v1';
+var fs = require('fs');
 var Q = require('q');
 var exec = require('child_process').exec;
 var child;
@@ -21,7 +22,7 @@ program
         console.log('尝试登录到 Jing.fm ...');
         login(options.username, options.password, options.keywords)
             .then(getList).then(getUrl).then(function(url) {
-                console.log('尝试打开浏览器...');
+                console.log('正在打开...');
                 play(url);
             }, function(err) {
                 console.log(err);
@@ -43,10 +44,17 @@ program.parse(process.argv);
  * @param  {[string]} url
  */
 function play(url) {
-    var child = exec('open ' + url + '?start=0', function(error, stdout, stderr) {
-        console.log('享受音乐吧!');
+    var r = request(url);
+    r.pipe(fs.createWriteStream('song.m4a'), {
+        end: false,
+        flags: 'r+',
+        mode: 0777
     });
-
+    r.on("end", function() {
+        var child = exec('afplay song.m4a', function(error, stdout, stderr) {
+            console.log('开始播放!！');
+        });
+    });
 }
 
 /**
@@ -151,5 +159,3 @@ function getUrl(options) {
 
     return def.promise;
 }
-
-
