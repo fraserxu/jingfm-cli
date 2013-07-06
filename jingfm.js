@@ -22,9 +22,11 @@ getUrl(options[2], options[3], options[4]).then(function(url) {
  * @param  {[string]} url
  */
 function play(url) {
-    var r = request(url);
     console.log('正在打开！');
-    child = exec('mplayer ' + url, function(error, stdout, stderr) {
+    var r = request(url);
+    child = exec('mplayer ' + url, {
+        maxBuffer: 2000*1024
+    }, function(error, stdout, stderr) {
         console.log('播放完毕!！');
     });
 }
