@@ -61,6 +61,7 @@ Options:
 ## 依赖
 
 * [Jing.fm](http://jing.fm) 帐号用于登陆
+* mplayer mac下可使用`brew install mplayer`安装，其他平台下同理
 
 ## Liscense:
 
