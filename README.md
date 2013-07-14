@@ -13,8 +13,11 @@
 > “我可以根据我的心情或者音乐的种类来搜歌么？我很懒。。。”
 
 
-当然可以，**打开你牛逼的命令行**，输入：
-```$ ./jingfm play -u xvfeng -p xvfeng -k rock```
+当然可以，**打开你牛逼的命令行** ，输入：
+
+```
+$ ./jingfm play -u xvfeng -p xvfeng -k rock
+```
 
 又或者你使用npm安装
 
