@@ -1,4 +1,4 @@
-## Nodejs 命令行只能歌曲匹配播放[Jing.fm](http://jing.fm)歌曲
+## Nodejs 命令行智能歌曲匹配播放[Jing.fm](http://jing.fm)歌曲
 
 ![jingfm-cli](https://f.cloud.github.com/assets/1183541/794455/f23b90be-ec9d-11e2-8af4-23ecd60478d6.png)
 
@@ -13,25 +13,29 @@
 > “我可以根据我的心情或者音乐的种类来搜歌么？我很懒。。。”
 
 
-#### 方法一：命令行可执行文件
-
-当然可以，打开你牛逼的命令行，输入： `$ ./jingfm play -u xvfeng -p xvfeng -k rock`
+当然可以，**打开你牛逼的命令行**，输入：
+```$ ./jingfm play -u xvfeng -p xvfeng -k rock```
 
 又或者你使用npm安装
 
  ```
  npm install jingfm-cli -g
  ```
- 执行：
+
+ 执行如何命令即可播放：
+
  ```
  jingfm-cli play -u $username -p $password -k "keywords here"
  ```
 
 **小提示：** 使用双引号支持多个汉字空格搜索
 
-### 不知道怎么用？
+#### 不知道怎么用？
 
-##### 试试这样 `$ jingfm-cli --help`
+试试这样:
+ ```
+ $ jingfm-cli --help
+ ```
 
 ``` js
 Usage: jingfm [options] [command]
@@ -53,7 +57,9 @@ Options:
 
 如果你比较喜欢使用node打开：
 
-```$ node jingfm.js xvfeng xvfeng "some rock music"```
+```
+$ node jingfm.js xvfeng xvfeng "some rock music"
+```
 
 听歌去吧，不用谢！
 
