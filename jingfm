@@ -30,8 +30,8 @@ program
             return;
         }
         console.log('尝试登录到 Jing.fm ...');
-        getUrl(username, password, keywords).then(function(url) {
-            play(url);
+        getUrl(username, password, keywords).then(function(urls) {
+            play(urls);
         }, function(err) {
             console.log(err);
         });
@@ -51,14 +51,12 @@ program.parse(process.argv);
  *
  * @param  {[string]} url
  */
-function play(url) {
+function play(urls) {
     console.log('正在打开！');
-
-    var r = request(url);
-    child = exec('mplayer ' + url, {
-        maxBuffer: 2000*1024
+    child = exec('mplayer ' + urls, {
+        maxBuffer: 20000*1024
     }, function(error, stdout, stderr) {
-        if(error) console.log(error); return;
+        if(error) console.log(error);
         console.log('播放完毕!！');
     });
 }
