@@ -3,6 +3,7 @@
  */
 var exec = require('child_process').exec;
 var getUrl = require('./lib/getUrl');
+var clc = require('cli-color');
 var child;
 
 // Get options from node process
@@ -21,7 +22,7 @@ getUrl(options[2], options[3], options[4]).then(function(urls) {
  * @param  {[string]} url
  */
 function play(urls) {
-    console.log('开始播放！');
+    console.log(clc.green('开始播放！'));
     child = exec('mplayer ' + urls, {
         maxBuffer: 20000*1024
     }, function(error, stdout, stderr) {
