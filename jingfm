@@ -18,8 +18,19 @@ program
     .command('play')
     .description('Try to play a song from Jing.fm')
     .action(function(options) {
+        var username = options.parent.username;
+        var password = options.parent.password;
+        var keywords = options.parent.keywords;
+        if (!username || !password) {
+            console.log('请输入用户名或密码！');
+            return;
+        }
+        if (!keywords) {
+            console.log('请输入关键字！')
+            return;
+        }
         console.log('尝试登录到 Jing.fm ...');
-        getUrl(options.parent.username, options.parent.password, options.parent.keywords).then(function(url) {
+        getUrl(username, password, keywords).then(function(url) {
             play(url);
         }, function(err) {
             console.log(err);
@@ -29,7 +40,7 @@ program
     .on('--help', function() {
         console.log(' Example');
         console.log();
-        console.log(' $ ./jingfm -u xvfeng -p xvfeng -k Rock');
+        console.log(' $ ./jingfm play -u xvfeng -p xvfeng -k Rock');
         console.log();
     });
 
@@ -47,6 +58,7 @@ function play(url) {
     child = exec('mplayer ' + url, {
         maxBuffer: 2000*1024
     }, function(error, stdout, stderr) {
+        if(error) console.log(error); return;
         console.log('播放完毕!！');
     });
 }
