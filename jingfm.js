@@ -26,7 +26,7 @@ function play(urls) {
     child = exec('mplayer ' + urls, {
         maxBuffer: 20000*1024
     }, function(error, stdout, stderr) {
-        if(error) console.log(error);
+        if(error) console.log(clc.red(error));
         console.log('播放完毕!！');
     });
 }

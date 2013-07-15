@@ -21,7 +21,7 @@ program
         getUrl(options.parent.username, options.parent.password, options.parent.keywords).then(function(urls) {
             play(urls);
         }, function(err) {
-            console.log(err);
+            console.log(clc.red(err));
         });
     })
     .usage('jingfm play [options]')
