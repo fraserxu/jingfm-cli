@@ -5,7 +5,7 @@
  */
 var program = require('commander');
 var getUrl = require('./lib/getUrl');
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var clc = require('cli-color');
 var child;
 
@@ -41,10 +41,11 @@ program.parse(process.argv);
  */
 function play(urls) {
     console.log(clc.green('开始播放！'));
-    child = exec('mplayer ' + urls, {
-        maxBuffer: 20000*1024
-    }, function(error, stdout, stderr) {
-        if(error) console.log(error);
-        console.log('播放完毕!！');
-    });
+    var player = spawn('mplayer', urls.split(' '));
+    player.stdout.pipe(process.stdout);
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', function(data) {
+        player.stdin.write(data.replace('\n', ''));
+    })
+    process.stdin.resume();
 }
