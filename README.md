@@ -33,6 +33,14 @@ $ ./jingfm play -u xvfeng -p xvfeng -k rock
 
 **小提示：** 使用双引号支持多个汉字空格搜索
 
+#### mplayer控制台
+
+**因为操作是在命令行下,输入相应指令后需要按`Enter键`,例如暂停时,`空格键 + Enter回车`**
+基本操作: (可以通过`mplayer --help`查看帮助)
+p or SPACE       暂停 (press any key to continue)
+q or ESC         停止 stop playing and quit program
+* or /           调整音量increase or decrease PCM volume
+
 #### 不知道怎么用？
 
 试试这样:
