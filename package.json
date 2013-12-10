@@ -8,7 +8,9 @@
     "request": "~2.21.0",
     "commander": "~1.2.0",
     "q": "~0.9.6",
-    "cli-color": "~0.2.2"
+    "cli-color": "~0.2.2",
+    "node-serial": "0.0.1",
+    "node-parallel": "~0.1.5"
   },
   "devDependencies": {},
   "keywords": [

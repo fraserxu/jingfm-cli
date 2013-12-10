@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var program = require('commander');
-var getUrl = require('./lib/getUrl');
+var api = require('./lib/api');
+var Serial = require('node-serial');
 var spawn = require('child_process').spawn;
 var clc = require('cli-color');
 var child;
@@ -14,21 +15,67 @@ program
     .option('-u, --username [username]', 'Email')
     .option('-p, --password [password]', 'Password')
     .option('-k, --keywords [keywords]', 'Keywords')
+    .option('-l --love', 'listen to your favorite songs')
     .command('play')
     .description('Try to play a song from Jing.fm')
     .action(function(options) {
-        console.log('尝试登录到 Jing.fm ...');
-        getUrl(options.parent.username, options.parent.password, options.parent.keywords).then(function(urls) {
-            play(urls);
-        }, function(err) {
-            console.log(clc.red(err));
-        });
+        var opts = options.parent;
+        var love = opts.love;
+        var email = opts.username;
+        var password = opts.password;
+        var keywords = opts.keywords;
+        var serial = new Serial();
+        var user;
+        serial.add(function(done) {
+            console.log('尝试登录到 Jing.fm ...');
+            api.login(email, password, function(err, user) {
+              if (err) return done(err);
+              console.log(clc.green('成功登录到 Jing.fm ...'));
+              done(null, user);
+            });
+        })
+        serial.add(function(done, ctx) {
+            user = ctx.res;
+            console.log('获取歌曲列表中 ...');
+            var cb = function(err, items) {
+              if(err) return done(err);
+              process.stdout.write('\n' + clc.blue('>>> 即将播放：') + '\n');
+              items.forEach(function(i) {
+                process.stdout.write((i.n||i.tit) + ' by '+ (i.atn || i.at) + '\n');
+              })
+              done(null, items);
+            }
+            if (love) {
+              api.getLoveMusics(user, cb);
+            } else {
+              api.getMusics(user, keywords, cb);
+            }
+        })
+        serial.add(function(done, ctx) {
+          console.log('获取歌曲列表url ...');
+            var items = ctx.res;
+            var mids = items.map(function(i) {
+              return i.mid;
+            })
+            api.getUrls(user, mids, function(err, urls) {
+              if (err) return done(err);
+              items.forEach(function(item, i) {
+                item['url'] = urls[i]
+              })
+              done(null, items);
+            });
+        })
+        serial.done(function(err, ctx) {
+          if(err) return console.log(clc.red(err));
+          play(user, ctx.res);
+        })
     })
     .usage('jingfm play [options]')
     .on('--help', function() {
         console.log(' Example');
         console.log();
         console.log(' $ ./jingfm play -u xvfeng -p xvfeng -k Rock');
+        console.log(' $ ./jingfm play -u xvfeng -p xvfeng -l');
         console.log();
     });
 
@@ -39,13 +86,36 @@ program.parse(process.argv);
  *
  * @param  {[string]} url
  */
-function play(urls) {
+function play(user, items) {
     console.log(clc.green('开始播放！'));
-    var player = spawn('mplayer', urls.split(' '));
+    var urls = items.map(function(m) {
+      return m.url;
+    })
+    var player = spawn('mplayer', urls);
+    var item;
     player.stdout.pipe(process.stdout);
+    player.stdout.on('data', function(chunk) {
+      var str = chunk.toString('utf8');
+      var m = str.match(/\nPlaying\s(.*)\.\n/);
+      if (m) {
+        var url = m[1];
+        items.forEach(function(i) {
+          if (i.url == url) {
+            item = i;
+          }
+        })
+      }
+    })
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', function(data) {
-        player.stdin.write(data.replace('\n', ''));
+        var action = data.replace('\n', '');
+        if (action == 'l') {
+          api.loveMusic(user, item.tid, function(err) {
+              if(err) return console.log(clc.red(err));
+              console.log(clc.green('标记喜欢成功: ' + item.n || item.tit));
+          })
+        }
+        player.stdin.write(action);
     })
     process.stdin.resume();
 }
