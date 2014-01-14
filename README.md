@@ -1,5 +1,9 @@
 ## Nodejs 命令行智能歌曲匹配播放[Jing.fm](http://jing.fm)歌曲
 
+这是一个fork版本，该版本支持播放喜欢列表和添加歌曲到喜欢列表。
+
+`-l`参数播放喜欢列表，播放音乐时输入`l`可添加音乐到jing.fm的喜欢列表。
+
 ![jingfm-cli](https://f.cloud.github.com/assets/1183541/794455/f23b90be-ec9d-11e2-8af4-23ecd60478d6.png)
 
 
@@ -50,7 +54,7 @@ q or ESC         停止 stop playing and quit program
 
 试试这样:
  ```
- $ jingfm-cli --help
+ $ ./jingfm --help
  ```
 
 ``` js
@@ -68,17 +72,6 @@ Options:
   -p, --password <password>  Password
   -k, --keywords <keywords>  Keywords
 ```
-
-#### 还可以这样: Nodejs 进程参数
-
-如果你比较喜欢使用node打开：
-
-```
-$ node jingfm.js xvfeng xvfeng "some rock music"
-```
-
-听歌去吧，不用谢！
-
 
 ## 依赖
 
