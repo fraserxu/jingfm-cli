@@ -12,6 +12,9 @@
     "node-serial": "0.0.1",
     "node-parallel": "~0.1.5"
   },
+  "scripts" : {
+    "start": "npm install"
+  },
   "devDependencies": {},
   "keywords": [
     "jingfm",

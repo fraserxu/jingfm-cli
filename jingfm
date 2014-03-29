@@ -18,7 +18,7 @@ program
     .option('-l --love', 'listen to your favorite songs')
     .command('play')
     .description('Try to play a song from Jing.fm')
-    .action(function(options) {
+    .action(function start (options) {
         var opts = options.parent;
         var love = opts.love;
         var email = opts.username;
@@ -67,7 +67,9 @@ program
         })
         serial.done(function(err, ctx) {
           if(err) return console.log(clc.red(err));
-          play(user, ctx.res);
+          play(user, ctx.res , function () {
+            start(options);
+          });
         })
     })
     .usage('jingfm play [options]')
@@ -86,7 +88,7 @@ program.parse(process.argv);
  *
  * @param  {[string]} url
  */
-function play(user, items) {
+function play(user, items , cb) {
     console.log(clc.green('开始播放！'));
     var urls = items.map(function(m) {
       return m.url;
@@ -108,6 +110,7 @@ function play(user, items) {
     })
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', function(data) {
+        //mplayer don't treat return
         var action = data.replace('\n', '');
         if (action == 'l') {
           api.loveMusic(user, item.tid, function(err) {
@@ -116,6 +119,10 @@ function play(user, items) {
           })
         }
         player.stdin.write(action);
+    })
+    player.on('exit', function () {
+      process.stdin.pause();
+      if (cb) cb();
     })
     process.stdin.resume();
 }
