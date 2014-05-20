@@ -1,4 +1,5 @@
 ## Nodejs 命令行智能歌曲匹配播放[Jing.fm](http://jing.fm)歌曲
+[![NPM](https://nodei.co/npm/jingfm-cli.png)](https://nodei.co/npm/jingfm-cli/)
 
 ![jingfm-cli](https://f.cloud.github.com/assets/1183541/794455/f23b90be-ec9d-11e2-8af4-23ecd60478d6.png)
 
