@@ -1,6 +1,10 @@
 ## Nodejs 命令行智能歌曲匹配播放[Jing.fm](http://jing.fm)歌曲
 [![NPM](https://nodei.co/npm/jingfm-cli.png)](https://nodei.co/npm/jingfm-cli/)
 
+这是一个fork版本，该版本支持播放喜欢列表和添加歌曲到喜欢列表。
+
+`-l`参数播放喜欢列表，播放音乐时输入`l`可添加音乐到jing.fm的喜欢列表。
+
 ![jingfm-cli](https://f.cloud.github.com/assets/1183541/794455/f23b90be-ec9d-11e2-8af4-23ecd60478d6.png)
 
 
@@ -34,6 +38,8 @@ $ ./jingfm play -u xvfeng -p xvfeng -k rock
 
 **小提示：** 使用双引号支持多个汉字空格搜索
 
+本分支添加了播放喜欢列表和标记喜欢歌曲的功能，命令行`-l`参数可用来播放喜欢的音乐列表，音乐播放中输入`l`可将该歌曲添加到你的喜欢列表。
+
 #### mplayer控制台
 
 **因为操作是在命令行下,输入相应指令后需要按`Enter键`,例如暂停时,`空格键 + Enter回车`**
@@ -49,7 +55,7 @@ q or ESC         停止 stop playing and quit program
 
 试试这样:
  ```
- $ jingfm-cli --help
+ $ ./jingfm --help
  ```
 
 ``` js
@@ -67,17 +73,6 @@ Options:
   -p, --password <password>  Password
   -k, --keywords <keywords>  Keywords
 ```
-
-#### 还可以这样: Nodejs 进程参数
-
-如果你比较喜欢使用node打开：
-
-```
-$ node jingfm.js xvfeng xvfeng "some rock music"
-```
-
-听歌去吧，不用谢！
-
 
 ## 依赖
 
